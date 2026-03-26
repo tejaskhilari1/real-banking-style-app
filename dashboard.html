@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>🏦 Bank Dashboard</h1>
+
+    <div class="card">
+        <h2>👤 Personal Details</h2>
+        <p><b>Name:</b> {{ user.name }}</p>
+        <p><b>Phone:</b> {{ user.phone }}</p>
+        <p><b>Account No:</b> {{ user.account_no }}</p>
+        <p><b>IFSC:</b> {{ user.ifsc }}</p>
+        <p><b>Bank:</b> {{ user.bank }}</p>
+        <p><b>Balance:</b> ₹{{ user.balance }}</p>
+        <p><b>Loan Status:</b> {{ user.loan }}</p>
+    </div>
+
+    <a href="/logout">
+        <button>Logout</button>
+    </a>
+</div>
+
+</body>
+</html>

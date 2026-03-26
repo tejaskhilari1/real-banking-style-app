@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SecurePay</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>💳 SecurePay</h1>
+
+    <div class="card">
+        <h2>Register</h2>
+        <input id="r_name" placeholder="Name">
+        <input id="r_phone" placeholder="Phone">
+        <input id="r_pass" type="password" placeholder="Password">
+        <button onclick="register()">Register</button>
+    </div>
+
+    <div class="card">
+        <h2>Login</h2>
+        <input id="l_phone" placeholder="Phone">
+        <input id="l_pass" type="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+    </div>
+
+    <p id="result"></p>
+</div>
+
+<script>
+async function register() {
+    let res = await fetch('/api/register', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            name: r_name.value,
+            phone: r_phone.value,
+            password: r_pass.value
+        })
+    });
+
+    let data = await res.json();
+    result.innerText = data.message;
+}
+
+async function login() {
+    let res = await fetch('/api/login', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            phone: l_phone.value,
+            password: l_pass.value
+        })
+    });
+
+    let data = await res.json();
+
+    if (data.message) {
+        window.location.href = "/dashboard";  // 🔥 redirect
+    } else {
+        result.innerText = data.error;
+    }
+}
+</script>
+
+</body>
+</html>
